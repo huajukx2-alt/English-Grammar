@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Grammar Master - Summary & 40 Questions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #2563eb; --secondary: #64748b; --success: #10b981; --error: #f43f5e; --warning: #f59e0b; --bg: #f8fafc; }
+        body { font-family: 'Chakra Petch', sans-serif; background: var(--bg); margin: 0; padding: 15px; color: #1e293b; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+        
+        /* Summary Section */
+        .summary-section { background: #f0f7ff; border: 2px solid #dbeafe; border-radius: 16px; padding: 25px; margin-bottom: 40px; }
+        .summary-title { font-size: 1.5em; font-weight: 700; color: var(--primary); margin-bottom: 20px; text-align: center; border-bottom: 2px solid #dbeafe; padding-bottom: 10px; }
+        .grid-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .summary-card { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .summary-card h3 { margin-top: 0; color: var(--primary); font-size: 1.1em; border-left: 4px solid var(--primary); padding-left: 10px; }
+        .summary-card ul { padding-left: 20px; margin-bottom: 0; }
+        .summary-card li { margin-bottom: 5px; font-size: 0.95em; }
+        
+        /* Quiz Section */
+        .score-box { position: sticky; top: 10px; background: #0f172a; color: white; padding: 15px 25px; border-radius: 50px; text-align: center; font-weight: bold; margin-bottom: 30px; z-index: 100; box-shadow: 0 8px 20px rgba(0,0,0,0.2); font-size: 1.2em; }
+        .question-item { margin-bottom: 30px; padding: 25px; border: 1px solid #e2e8f0; border-radius: 18px; transition: 0.3s; }
+        .question-item:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .q-text { font-size: 1.15em; font-weight: 700; margin-bottom: 20px; }
+        .opt-grid { display: grid; gap: 12px; }
+        .opt-btn { padding: 16px; border: 2px solid #f1f5f9; border-radius: 12px; background: #f8fafc; text-align: left; cursor: pointer; transition: 0.2s; font-family: inherit; font-size: 1em; }
+        .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: #eff6ff; }
+        .opt-btn.correct { background: var(--success) !important; color: white; border-color: #059669; }
+        .opt-btn.wrong { background: var(--error) !important; color: white; border-color: #be123c; }
+        .hint-box { margin-top: 15px; padding: 15px; background: #fffbeb; border-radius: 10px; display: none; border-left: 5px solid var(--warning); font-size: 0.95em; }
+        
+        @media (max-width: 768px) { .grid-summary { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="summary-section">
+        <div class="summary-title">💡 สรุปเรื่องที่ออกสอบนะไอสัส</div>
+        <div class="grid-summary">
+            <div class="summary-card">
+                <h3>1. บอกจำนวน (Quantifiers)</h3>
+                <ul>
+                    <li><b>นับได้ (s):</b> many, few, a few</li>
+                    <li><b>นับไม่ได้:</b> much, little, a little</li>
+                    <li><b>สูตรจำ:</b> few/little = <b>แทบไม่มี (-)</b> | a few/a little = <b>พอมี (+)</b></li>
+                </ul>
+            </div>
+            <div class="summary-card">
+                <h3>2. V.ing หรือ To + V</h3>
+                <ul>
+                    <li><b>ตามด้วย V.ing:</b> finish, enjoy, mind, avoid, keep, suggest, good at</li>
+                    <li><b>ตามด้วย To + V:</b> want, hope, decide, promise, plan</li>
+                </ul>
+            </div>
+            <div class="summary-card">
+                <h3>3. รีพอร์ต (Reported)</h3>
+                <ul>
+                    <li><b>Tense:</b> is -> was, will -> would, can -> could, V.1 -> V.2</li>
+                    <li><b>เวลา:</b> now -> then, today -> that day</li>
+                    <li><b>ประโยคสั่ง:</b> told + (not) to + V.inf</li>
+                </ul>
+            </div>
+            <div class="summary-card">
+                <h3>4. กริยาช่วย (Modals)</h3>
+                <ul>
+                    <li><b>Mustn't:</b> ห้ามทำเด็ดขาด (ผิดกฎ)</li>
+                    <li><b>Don't have to:</b> ไม่จำเป็นต้องทำ (ชิลๆ)</li>
+                    <li><b>Was able to:</b> สามารถทำได้</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="score-box">คะแนนของมึง: <span id="userScore">0</span> / 40</div>
+    <div id="quiz-area"></div>
+</div>
+
+<script>
+const questions = [
+    // (ชุดข้อมูลคำถามเดิมทั้ง 40 ข้อที่ผมใส่ไว้ให้ในครั้งก่อน)
+    { topic: "Quantifiers", q: "Only ________ students came to the meeting. Maybe three or four.", options: ["a little of", "plenty of", "very little of", "a few of"], correct: 3, hint: "นามนับได้พหูพจน์ (students) + จำนวนน้อย = a few of" },
+    { topic: "Gerund", q: "Have you finished ________ the project yet?", options: ["write", "to write", "writing", "written"], correct: 2, hint: "หลังกริยา 'finish' ต้องตามด้วย Gerund (V.ing) เสมอ" },
+    { topic: "Verb Patterns", q: "We are looking forward to ________ you at the party next week.", options: ["see", "seeing", "to see", "seen"], correct: 1, hint: "look forward to + V.ing (to ในที่นี้เป็น preposition)" },
+    { topic: "Reported Speech", q: "Direct: They said, \"We are studying now.\"", options: ["They said they were studying then", "They said we are studying now", "They said they are studying this week", "They said they were studying now"], correct: 0, hint: "กฎการ Backshift: are studying -> were studying | now -> then" },
+    { topic: "Reported Speech", q: "Teacher: \"Don't talk during the test.\"", options: ["She told us not to talk during the test", "She told us to not talk during the test", "She ordered us do not talk during the test", "She asked us if we talked during the test"], correct: 0, hint: "ประโยคสั่งห้าม: told + someone + NOT to + V.inf" },
+    { topic: "Ability", q: "She ________ write when she was 10, but now she ________ write four languages.", options: ["wasn't able to / isn't able to", "was able to / is able to", "weren't able to / isn't able to", "wasn't able to / is able to"], correct: 1, hint: "อดีต (was 10) ใช้ was able to | ปัจจุบันใช้ is able to" },
+    { topic: "Modals", q: "Sign: \"NO SMOKING\" — Which statement is NOT TRUE?", options: ["You cannot smoke", "You must not smoke", "Smoking is not permitted", "Smoking is allowed"], correct: 3, hint: "Smoking is allowed = อนุญาต ซึ่งขัดกับป้ายห้ามสูบ" },
+    { topic: "Modals", q: "Players ________ argue during the game, but they ________ ask questions politely.", options: ["don't have to / allow", "can't / are allowed to", "have to / can't", "must / need to"], correct: 1, hint: "can't (ห้าม) | are allowed to (ได้รับอนุญาต)" },
+    { topic: "Quantifiers", q: "How ________ coffee do you drink every day?", options: ["many", "few", "much", "little"], correct: 2, hint: "coffee นับไม่ได้ ใช้ much ในประโยคคำถาม" },
+    { topic: "Quantifiers", q: "I have ________ friends in this city, so I never feel lonely.", options: ["a few", "few", "little", "much"], correct: 0, hint: "a few = มีบ้าง (เชิงบวก) | few = แทบไม่มีเลย (เชิงลบ)" },
+    { topic: "Gerund", q: "I don't mind ________ for another ten minutes.", options: ["wait", "to wait", "waiting", "waited"], correct: 2, hint: "mind + V.ing เสมอ" },
+    { topic: "Verb Patterns", q: "He promised ________ me as soon as he arrived.", options: ["call", "to call", "calling", "called"], correct: 1, hint: "promise + to + V.inf" },
+    { topic: "Reported Speech", q: "Direct: \"I will help you,\" Joe said to me.", options: ["Joe said he will help me", "Joe told me he would help me", "Joe told to me he would help me", "Joe said me he would help me"], correct: 1, hint: "will -> would | tell + object (ไม่ต้องมี to)" },
+    { topic: "Modals", q: "You ________ wear a uniform in this school. It's the rule.", options: ["may", "must", "can", "might"], correct: 1, hint: "must ใช้กับกฎระเบียบ" },
+    { topic: "Quantifiers", q: "There is ________ milk in the fridge. It's enough for your cereal.", options: ["a few", "a little", "many", "few"], correct: 1, hint: "milk (นับไม่ได้) + มีอยู่บ้าง = a little" },
+    { topic: "Reported Speech", q: "Direct: \"Where is the station?\" he asked.", options: ["He asked where was the station", "He asked where the station was", "He asked if where is the station", "He asked where is the station"], correct: 1, hint: "Wh- question เรียงแบบประโยคบอกเล่าใน reported speech" },
+    { topic: "Ability", q: "When the fog lifts, we ________ to see the mountains.", options: ["can", "could", "will be able", "are able"], correct: 2, hint: "อนาคตใช้ will be able to" },
+    { topic: "Gerund", q: "Avoid ________ too much junk food if you want to be healthy.", options: ["eat", "to eat", "eating", "eaten"], correct: 2, hint: "avoid + V.ing" },
+    { topic: "Quantifiers", q: "There weren't ________ people at the cinema last night.", options: ["many", "much", "little", "few"], correct: 0, hint: "people (นับได้พหูพจน์) ใช้ many" },
+    { topic: "Modals", q: "You ________ drive so fast. We have plenty of time.", options: ["mustn't", "don't have to", "can't", "shouldn't"], correct: 3, hint: "shouldn't = ไม่ควรทำ (การแนะนำ)" },
+    { topic: "Verb Patterns", q: "I hope ________ my exams next week.", options: ["pass", "passing", "to pass", "to passing"], correct: 2, hint: "hope + to + V.inf" },
+    { topic: "Reported Speech", q: "Direct: \"I have been working here for years,\" she said.", options: ["She said she has been working there", "She said she was working there", "She said she had been working there", "She said she is working there"], correct: 2, hint: "Pres. Perf. Cont -> Past Perf. Cont" },
+    { topic: "Modals", q: "Students ________ use mobile phones during the exam.", options: ["don't have to", "are not allowed to", "might not", "should"], correct: 1, hint: "are not allowed to = ไม่ได้รับอนุญาต" },
+    { topic: "Quantifiers", q: "We only have ________ time left. Hurry up!", options: ["little", "a little", "few", "a few"], correct: 0, hint: "little = แทบไม่มีเวลาเหลือแล้ว (เชิงลบ)" },
+    { topic: "Gerund", q: "I'm interested in ________ more about Thai history.", options: ["learn", "to learn", "learning", "learned"], correct: 2, hint: "Preposition (in) + V.ing" },
+    { topic: "Ability", q: "I ________ swim when I was five years old.", options: ["can", "could", "am able to", "will can"], correct: 1, hint: "ความสามารถในอดีตใช้ could" },
+    { topic: "Reported Speech", q: "Direct: \"Sit down!\" the boss said to him.", options: ["The boss told him sit down", "The boss told him to sit down", "The boss said him to sit down", "The boss told to him sit down"], correct: 1, hint: "คำสั่งบอกเล่าใช้ told + object + to + V.inf" },
+    { topic: "Quantifiers", q: "She has ________ books that she needs a new bookshelf.", options: ["so many", "so much", "too much", "a few"], correct: 0, hint: "books (นับได้) ใช้ so many" },
+    { topic: "Modals", q: "________ I come in?", options: ["Must", "Should", "May", "Need"], correct: 2, hint: "May ใช้ขออนุญาตอย่างสุภาพ" },
+    { topic: "Verb Patterns", q: "They plan ________ a new house next year.", options: ["buy", "to buy", "buying", "bought"], correct: 1, hint: "plan + to + V.inf" },
+    { topic: "Quantifiers", q: "Is there ________ bread on the table?", options: ["many", "few", "any", "a few"], correct: 2, hint: "any ใช้ในประโยคคำถามนามนับไม่ได้" },
+    { topic: "Reported Speech", q: "Direct: \"I don't like sushi,\" Ken said.", options: ["Ken said he doesn't like sushi", "Ken said he didn't like sushi", "Ken said he hasn't liked sushi", "Ken said I didn't like sushi"], correct: 1, hint: "Present -> Past (didn't like)" },
+    { topic: "Gerund", q: "They enjoy ________ in the park every morning.", options: ["run", "to run", "running", "ran"], correct: 2, hint: "enjoy + V.ing" },
+    { topic: "Modals", q: "You ________ wash the dishes. I'll do it later.", options: ["mustn't", "can't", "don't have to", "not allowed to"], correct: 2, hint: "don't have to = ไม่จำเป็นต้องทำ" },
+    { topic: "Ability", q: "After years of practice, he ________ speak English fluently.", options: ["is able to", "was able to", "can't", "couldn't"], correct: 0, hint: "ความสามารถปัจจุบันใช้ is able to" },
+    { topic: "Quantifiers", q: "He knows ________ about physics. He's an expert.", options: ["many", "a lot", "few", "a few"], correct: 1, hint: "know a lot = รู้เยอะมาก" },
+    { topic: "Reported Speech", q: "Direct: \"Can you swim?\" she asked me.", options: ["She asked me if I could swim", "She asked me I can swim", "She asked me if I can swim", "She asked to me if I could swim"], correct: 0, hint: "Yes/No Question ใช้ if + subject + V. (backshift)" },
+    { topic: "Verb Patterns", q: "Would you mind ________ the window?", options: ["open", "to open", "opening", "opened"], correct: 2, hint: "Would you mind + V.ing?" },
+    { topic: "Modals", q: "You ________ be late for the meeting.", options: ["don't have to", "mustn't", "can", "may"], correct: 1, hint: "mustn't = ห้ามเด็ดขาด" },
+    { topic: "Quantifiers", q: "We don't have ________ money to buy a Ferrari.", options: ["many", "few", "enough", "a few"], correct: 2, hint: "enough วางไว้หน้านาม" }
+];
+
+let score = 0;
+const quizArea = document.getElementById('quiz-area');
+
+function init() {
+    questions.forEach((data, i) => {
+        const div = document.createElement('div');
+        div.className = 'question-item';
+        div.innerHTML = `
+            <div class="q-text">${i+1}. ${data.q}</div>
+            <div class="opt-grid" id="opts-${i}">
+                ${data.options.map((opt, idx) => `<button class="opt-btn" onclick="check(${i}, ${idx})">${opt}</button>`).join('')}
+            </div>
+            <div class="hint-box" id="hint-${i}"></div>
+        `;
+        quizArea.appendChild(div);
+    });
+}
+
+window.check = (qIdx, choiceIdx) => {
+    const btns = document.getElementById(`opts-${qIdx}`).querySelectorAll('.opt-btn');
+    const hint = document.getElementById(`hint-${qIdx}`);
+    const correct = questions[qIdx].correct;
+
+    if (btns[0].disabled) return;
+
+    btns.forEach((btn, i) => {
+        btn.disabled = true;
+        if (i === correct) btn.classList.add('correct');
+        else if (i === choiceIdx) btn.classList.add('wrong');
+    });
+
+    hint.style.display = 'block';
+    if (choiceIdx === correct) {
+        score++;
+        document.getElementById('userScore').innerText = score;
+        hint.innerHTML = `✅ <b>ถูกต้อง!</b> | ${questions[qIdx].hint}`;
+    } else {
+        hint.innerHTML = `❌ <b>เฉลยคือ:</b> ${questions[qIdx].options[correct]}<br>💡 ${questions[qIdx].hint}`;
+    }
+}
+
+init();
+</script>
+</body>
+</html>
